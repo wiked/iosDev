@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <math.h>
 
 @interface CalculatorViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *display;
+@property (weak, nonatomic) IBOutlet UITextView *history;
+@property (weak, nonatomic) IBOutlet UILabel *statusDisplay;
 
 @end
