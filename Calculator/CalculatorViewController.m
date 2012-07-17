@@ -56,7 +56,7 @@
     }
     
     self.display.text = [[NSNumber numberWithDouble:[self.brain performOperation:sender.currentTitle]] stringValue];
-    self.history.text = [self.brain operationStackAsString];
+    self.history.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
     
 }
 
@@ -65,20 +65,29 @@
     [self.brain pushOperand:[self.display.text doubleValue]];
     self.userIsInTheMiddleOfEnteringANumber = NO;
     self.numberHasDecimalPointAlready = NO;
-    self.history.text = [self.brain operationStackAsString];
+    self.history.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
     self.statusDisplay.text = @"=";
 
     
 }
 
 - (IBAction)changeSignPressed {
+
+    /*
+     //leaving this in... as it's somewhat elegant... it just doesn't work with the next assignment (#2)
+     // gotta do this without touching CalculatorBrain
+     
     // I don't want to change any flags here... just negate the display.
     [self.brain pushOperand:[self.display.text doubleValue]];
     
     // performOperation:@"+/-" will pop the operand off stack, return a result... but won't add the result back on the stack.
     // ...so no one will be the wiser!
     self.display.text = [[NSNumber numberWithDouble:[self.brain performOperation:@"+/-"]] stringValue];
+     
+    */
     
+    self.display.text = [[NSNumber numberWithDouble:([self.display.text doubleValue] * -1)] stringValue];
+    self.statusDisplay.text = @"";
 }
 
 - (IBAction)clearPressed:(UIButton *)sender {
